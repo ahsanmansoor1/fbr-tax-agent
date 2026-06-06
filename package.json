@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"node server.js\" \"vite\"",
+    "dev": "concurrently --kill-others \"node server.js\" \"vite --port 3000\"",
     "start": "node server.js",
     "build": "vite build"
   },

@@ -3,7 +3,7 @@ import express from 'express';
 import Anthropic from '@anthropic-ai/sdk';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3001;
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
