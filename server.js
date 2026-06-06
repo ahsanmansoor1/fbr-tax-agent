@@ -3,16 +3,16 @@ import express from 'express';
 import Anthropic from '@anthropic-ai/sdk';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = process.env.PROJECT_ROOT || process.cwd();
 const app = express();
 const port = process.env.PORT || 3000;
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(ROOT, 'dist')));
 
 const SYSTEM_PROMPT = `You are a knowledgeable and helpful FBR (Federal Board of Revenue) tax filing assistant for Pakistan.
 You help individuals and businesses understand and complete their tax filing obligations under Pakistani tax law.
@@ -84,7 +84,7 @@ app.post('/ask', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(ROOT, 'dist', 'index.html'));
 });
 
 app.listen(port, () => {
